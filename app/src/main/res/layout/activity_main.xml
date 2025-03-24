@@ -6,87 +6,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+    <!--    <ListView-->
+    <!--        android:id="@+id/list_item"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="01"
-                android:layout_marginBottom="3dp">
+    <Button
+        android:id="@+id/Add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        app:layout_constraintStart_toEndOf="@+id/Remove"
+        app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/a"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="a="
-                    android:textSize="30sp"/>
+    <Button
+        android:id="@+id/Remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/b"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="b="
-                    android:textSize="30sp"/>
+    <Button
+        android:id="@+id/Update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        app:layout_constraintStart_toEndOf="@+id/Add"
+        app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/c"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="c="
-                    android:textSize="30sp"/>
-            </LinearLayout>
+    <ListView
+        android:id="@+id/list_item"
+        android:layout_width="409dp"
+        android:layout_height="677dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Update" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/res1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="x1="
-                    android:textSize="30sp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="3dp"
-                    android:background="@drawable/border"/>
-                <TextView
-                    android:id="@+id/res2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="x2="
-                    android:textSize="30sp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="3dp"
-                    android:background="@drawable/border"/>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Result"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"></LinearLayout>
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

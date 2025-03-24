@@ -3,16 +3,20 @@ package com.example.bieuthucbachai
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlin.math.sqrt
 
-class MainActivity : AppCompatActivity(), OnClickListener {
+class MainActivity : AppCompatActivity() {
 
     lateinit var res1: TextView
     lateinit var res2: TextView
@@ -25,54 +29,57 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        res1 = findViewById(R.id.res1)
-        res2 = findViewById(R.id.res2)
-        a = findViewById(R.id.a)
-        b = findViewById(R.id.b)
-        c = findViewById(R.id.c)
-
-        findViewById<Button>(R.id.button).setOnClickListener(this)
-    }
-
-    fun isNumber(text: String): Boolean {
-        return text.toIntOrNull() != null || text.toDoubleOrNull() != null
-    }
-
-    override fun onClick(v: View?) {
-        when(v!!.id) {
-            R.id.button -> {
-                var a_str = a.text.toString()
-                var b_str = b.text.toString()
-                var c_str = c.text.toString()
-
-                if (isNumber(a_str) && isNumber(b_str) && isNumber(c_str)) {
-                    var a_num = a_str.toDouble()
-                    var b_num = b_str.toDouble()
-                    var c_num = c_str.toDouble()
-
-                    var delta: Double = b_num * b_num - 4 * a_num * c_num
-
-                    if (delta < 0) {
-                        res1.text = "No res"
-                        res2.text = "No res"
-                    }
-                    else if (delta == 0.0) {
-                        var res: Double = - (b_num / (2 * a_num))
-                        res1.text = "x1=" + res.toString()
-                        res2.text = "x2=" + res.toString()
-                    }
-                    else {
-                        res1.text = "x1=" + ((- b_num + sqrt(delta)) / (2 * a_num)).toString()
-                        res2.text = "x2=" + ((- b_num - sqrt(delta)) / (2 * a_num)).toString()
-                    }
-                }
-                else {
-                    res1.text = "Error"
-                    res2.text = "Error"
-                }
 
 
+        // 1. Chuan bi du lieu
+        val items = mutableListOf<String>()
+
+        repeat(50) { items.add("Item $it")}
+
+
+        // 2. Tao adapter
+//        val adapter: ArrayAdapter<String> = ArrayAdapter(
+//            this,
+//            android.R.layout.simple_list_item_1,
+//            items
+//        )
+        // layout tu thiet ke
+        val adapter = ArrayAdapter (    // adapter quy dinh cach hien thi du lieu danh sach
+            this,
+            R.layout.layout_simple_item,    // Chon file layout nao
+            R.id.text_content,  // Khai bao id cua textview de hien thi du lieu
+            items   // Doi tuong danh sach
+        )
+
+        findViewById<Button>(R.id.Add).setOnClickListener {
+            items.add(0, "New item")
+            adapter.notifyDataSetChanged()
+        }
+        findViewById<Button>(R.id.Update).setOnClickListener {
+            items[0] = "Update"
+            adapter.notifyDataSetChanged()
+        }
+        findViewById<Button>(R.id.Remove).setOnClickListener {
+            items.removeAt(0)
+            adapter.notifyDataSetChanged()
+        }
+        // 3. Thiet lap adapter cho danh sach
+
+        val listView = findViewById<ListView>(R.id.list_item)
+        listView.adapter = adapter
+
+        // 4. Xu ly su kien chon phan tu
+
+        listView.onItemClickListener = object: AdapterView.OnItemClickListener {
+            override fun onItemClick(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                Toast.makeText(this@MainActivity, "${items[position]}", Toast.LENGTH_LONG).show()
             }
         }
     }
+
 }
