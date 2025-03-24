@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.GridView
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var b: EditText
     lateinit var c: EditText
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -68,27 +69,24 @@ class MainActivity : AppCompatActivity() {
         }
         // 3. Thiet lap adapter cho danh sach
 
-        val spinner = findViewById<Spinner>(R.id.spinner)
-        spinner.adapter = adapter
+        val gridView = findViewById<GridView>(R.id.gridview)
+        gridView.adapter = adapter
 
         // 4. Xu ly su kien chon phan tu
+//
+//        gridView.onItemClickListener = object : AdapterView.OnItemClickListener {
+//            override fun onItemClick(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                TODO("Not yet implemented")
+//            }
+//
+//
+//        }
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                Toast.makeText(this@MainActivity, "${items[position]}", Toast.LENGTH_LONG).show()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-        }
-
-        spinner.setSelection(8)
     }
 
 }
