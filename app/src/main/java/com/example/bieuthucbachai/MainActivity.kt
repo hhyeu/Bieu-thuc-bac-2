@@ -6,6 +6,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.GridView
@@ -36,10 +37,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // 1. Chuan bi du lieu
-        val items = mutableListOf<String>()
-
-        repeat(50) { items.add("Item $it")}
-
+        val items: Array<String> = arrayOf("words", "starting", "with", "set", "Setback", "Setline", "Setoffs", "Setouts", "Setters", "Setting", "Settled", "Settler", "Wordless", "Wordiness", "Adios")
 
         // 2. Tao adapter
         val adapter: ArrayAdapter<String> = ArrayAdapter(
@@ -55,22 +53,23 @@ class MainActivity : AppCompatActivity() {
 //            items   // Doi tuong danh sach
 //        )
 
-        findViewById<Button>(R.id.Add).setOnClickListener {
-            items.add(0, "New item")
-            adapter.notifyDataSetChanged()
-        }
-        findViewById<Button>(R.id.Update).setOnClickListener {
-            items[0] = "Update"
-            adapter.notifyDataSetChanged()
-        }
-        findViewById<Button>(R.id.Remove).setOnClickListener {
-            items.removeAt(0)
-            adapter.notifyDataSetChanged()
-        }
+//        findViewById<Button>(R.id.Add).setOnClickListener {
+//            items.add(0, "New item")
+//            adapter.notifyDataSetChanged()
+//        }
+//        findViewById<Button>(R.id.Update).setOnClickListener {
+//            items[0] = "Update"
+//            adapter.notifyDataSetChanged()
+//        }
+//        findViewById<Button>(R.id.Remove).setOnClickListener {
+//            items.removeAt(0)
+//            adapter.notifyDataSetChanged()
+//        }
         // 3. Thiet lap adapter cho danh sach
 
-        val gridView = findViewById<GridView>(R.id.gridview)
-        gridView.adapter = adapter
+        val auto = findViewById<AutoCompleteTextView>(R.id.auto)
+        auto.setAdapter(adapter)
+
 
         // 4. Xu ly su kien chon phan tu
 //
